@@ -1,12 +1,12 @@
-FROM jboss/wildfly:8.2.0.Final
+FROM jboss/wildfly:10.0.0.Final
 
 # need root to install dependencies
 USER root
 
 # remove jdk 7 and install jdk 8
-RUN yum remove -y java-1.7.0-openjdk-devel
+#RUN yum remove -y java-1.7.0-openjdk-devel
 
-RUN yum install -y java-1.8.0-openjdk-devel
+#RUN yum install -y java-1.8.0-openjdk-devel
 
 RUN yum install -y epel-release
 
@@ -18,9 +18,9 @@ USER jboss
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
-COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
+COPY standalone_v10.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
-COPY mysql-connector-java-5.1.30-bin.jar /opt/jboss/wildfly/modules/com/mysql/main/mysql-connector-java-5.1.30-bin.jar
+COPY mysql-connector-java-5.1.38-bin.jar /opt/jboss/wildfly/modules/com/mysql/main/mysql-connector-java-5.1.38-bin.jar
 
 COPY module.xml /opt/jboss/wildfly/modules/com/mysql/main/module.xml
 
