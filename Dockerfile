@@ -20,7 +20,7 @@ RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
 
 COPY standalone.xml /opt/jboss/wildfly/standalone/configuration/standalone.xml
 
-COPY mysql-connector-java-5.1.30-bin.jar /opt/jboss/wildfly/modules/com/mysql/main/mysql-connector-java-5.1.30-bin.jar
+COPY mysql-connector-java-5.1.38-bin.jar /opt/jboss/wildfly/modules/com/mysql/main/mysql-connector-java-5.1.38-bin.jar
 
 COPY module.xml /opt/jboss/wildfly/modules/com/mysql/main/module.xml
 
