@@ -24,8 +24,8 @@ COPY mysql-connector-java-5.1.30-bin.jar /opt/jboss/wildfly/modules/com/mysql/ma
 
 COPY module.xml /opt/jboss/wildfly/modules/com/mysql/main/module.xml
 
-#RUN curl -o /opt/jboss/wildfly/standalone/deployments/arctic-web.war https://dma.ci.cloudbees.com/job/ArcticWeb-branch-master/lastSuccessfulBuild/dk.dma.enav.arcticweb$arcticweb/artifact/dk.dma.enav.arcticweb/arcticweb/2.6-SNAPSHOT/arcticweb-2.6-SNAPSHOT.war
+RUN curl -o /opt/jboss/wildfly/standalone/deployments/arcticweb.war https://dma.ci.cloudbees.com/job/ArcticWeb-branch-master/lastSuccessfulBuild/dk.dma.enav.arcticweb\$arcticweb/artifact/dk.dma.enav.arcticweb/arcticweb/2.6-SNAPSHOT/arcticweb-2.6-SNAPSHOT.war
 
-#RUN ls -la /opt/jboss/wildfly/standalone/deployments
+RUN ls -la /opt/jboss/wildfly/standalone/deployments
 
 CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
