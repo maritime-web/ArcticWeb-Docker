@@ -28,4 +28,14 @@ RUN curl -o /opt/jboss/wildfly/standalone/deployments/arcticweb.war https://dma.
 
 RUN ls -la /opt/jboss/wildfly/standalone/deployments
 
-CMD ["/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
+# with many thanks to https://github.com/vishnubob/wait-for-it
+COPY wait_for_it.sh /opt/jboss/wildfly/bin/wait_for_it.sh
+
+USER root
+
+RUN chmod +x /opt/jboss/wildfly/bin/wait_for_it.sh
+
+USER jboss
+
+# wait for the mysql server to be ready and then start the wildfly server
+CMD ["/opt/jboss/wildfly/bin/wait_for_it.sh", "db:3306", "--timeout=40", "--strict", "--", "/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
