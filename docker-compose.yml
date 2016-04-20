@@ -1,7 +1,7 @@
 version: '2'
 services:
   arcticweb:
-    build: .
+    image: dmadk/arcticweb
     links:
       - mysqldb:db
       - couchdb:couch

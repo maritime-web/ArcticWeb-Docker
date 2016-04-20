@@ -14,9 +14,9 @@ Clone the repository to a choosen directory using
 In your home directory you need to make two new directories - 'properties' and 'arcticCouch'. The latter needs to have the subdirectory 'couchdb/etc/etc/local.d'.
 In the 'properties' directory you should put the 'arcticweb.properties' file, and in 'arcticCouch' in the former specified subdirectory you should put the configuration files for the CouchDB.
 
-Then build the container using Docker Compose
+If you want to build the ArcticWeb container yourself
 
-    $ docker-compose build
+    $ docker build -t dmadk/arcticweb .
 
 To start the container execute the following command
     
