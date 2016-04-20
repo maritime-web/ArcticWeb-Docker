@@ -18,15 +18,11 @@ Then build the container using Docker Compose
 
     $ docker-compose build
 
-On the first run you need to start the two databases before ArcticWeb
-
-    $ docker-compose up mysqldb couchdb
-
-The CouchDB should start relatively fast and when the MySQL is ready you can start ArcticWeb 
+To start the container execute the following command
     
     $ docker-compose up
 
-On subsequent startups you can start the entire database with the following
+On subsequent startups you can start the container with either
 
     $ docker-compose up
 
