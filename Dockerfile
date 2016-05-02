@@ -14,6 +14,8 @@ RUN yum install -y nodejs npm --enablerepo=epel
 
 RUN npm install grunt
 
+RUN yum clean all
+
 USER jboss
 
 RUN /opt/jboss/wildfly/bin/add-user.sh admin admin --silent
@@ -24,7 +26,11 @@ COPY mysql-connector-java-5.1.38-bin.jar /opt/jboss/wildfly/modules/com/mysql/ma
 
 COPY module.xml /opt/jboss/wildfly/modules/com/mysql/main/module.xml
 
-RUN curl -o /opt/jboss/wildfly/standalone/deployments/arcticweb.war https://dma.ci.cloudbees.com/job/ArcticWeb-branch-master/lastSuccessfulBuild/dk.dma.enav.arcticweb\$arcticweb/artifact/dk.dma.enav.arcticweb/arcticweb/2.6-SNAPSHOT/arcticweb-2.6-SNAPSHOT.war
+RUN curl -o /opt/jboss/wildfly/standalone/deployments/arctic-web.zip https://dma.ci.cloudbees.com/job/ArcticWeb-branch-master/dk.dma.enav.arcticweb\$arcticweb/lastSuccessfulBuild/artifact/dk.dma.enav.arcticweb/arcticweb/**/*.war/*zip*/arctic-web.zip
+
+RUN unzip -j -C /opt/jboss/wildfly/standalone/deployments/arctic-web.zip *.war -d /opt/jboss/wildfly/standalone/deployments/
+
+RUN rm /opt/jboss/wildfly/standalone/deployments/arctic-web.zip
 
 RUN ls -la /opt/jboss/wildfly/standalone/deployments
 
