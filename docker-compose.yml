@@ -5,15 +5,16 @@ services:
     links:
       - mysqldb:db
       - couchdb:couch
-    ports: 
+    ports:
       - "8080:8080"
       - "8443:8443"
       #- "9990:9990"
-    depends_on: 
+    depends_on:
       - mysqldb
       - couchdb
-    volumes: 
-      - ~$USER/properties:/opt/jboss/wildfly/arcticweb_properties
+    volumes:
+      - ~$USER/arcticweb/properties:/opt/jboss/wildfly/arcticweb_properties
+      - ~$USER/arcticweb:/opt/jboss/arcticweb
   mysqldb:
     image: mysql
     environment:
@@ -21,8 +22,9 @@ services:
       MYSQL_USER: embryo
       MYSQL_PASSWORD: embryo
       MYSQL_DATABASE: embryo
+    volumes:
+      - ~$USER/arcticweb/mysql:/var/lib/mysql
   couchdb:
     image: dmadk/embryo-couchdb
     volumes:
       - ~$USER/arcticCouch/couchdb:/data
-
