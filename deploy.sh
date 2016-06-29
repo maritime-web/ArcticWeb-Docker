@@ -22,7 +22,7 @@ full () {
 
     docker create --name arctic_couch --net=arcticnet --log-driver=fluentd --log-opt fluentd-async-connect=true --restart=unless-stopped -v $HOME/arcticweb/couchdb:/data dmadk/embryo-couchdb
 
-    docker create --name arcticweb --net=arcticnet --log-driver=fluentd --link arctic_db:db --link arctic_couch:couch --log-opt fluentd-async-connect=true --restart=unless-stopped -p 8080:8080 -v $HOME/arcticweb/properties:/opt/jboss/wildfly/arcticweb_properties -v $HOME/arcticweb:/opt/jboss/arcticweb dmadk/arcticweb
+    docker create --name arcticweb --net=arcticnet --log-driver=fluentd --log-opt fluentd-async-connect=true --restart=unless-stopped -p 8080:8080 -v $HOME/arcticweb/properties:/opt/jboss/wildfly/arcticweb_properties -v $HOME/arcticweb:/opt/jboss/arcticweb dmadk/arcticweb
 
     docker create --name arctic_watchtower --log-driver=fluentd --log-opt fluentd-async-connect=true --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock centurylink/watchtower arcticweb --cleanup
 
