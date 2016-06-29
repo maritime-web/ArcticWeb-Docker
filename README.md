@@ -11,8 +11,8 @@ Clone the repository to a choosen directory using
 
     $ git clone https://github.com/maritime-web/ArcticWeb-Docker.git
 
-In your home directory you need to make two new directories - 'properties' and 'arcticCouch'. The latter needs to have the subdirectory 'couchdb/etc/local.d'.
-In the 'properties' directory you should put the 'arcticweb.properties' file, and in 'arcticCouch/couchdb/etc/local.d' you should put the configuration files you wish to use for the CouchDB.
+In your home directory you need to make a new directory called 'arcticweb' and in this directory you need to make two other new directories - 'properties' and 'couchdb'. The latter needs to have the subdirectory 'etc/local.d'.
+In the 'properties' directory you should put the 'arcticweb.properties' file, and in 'couchdb/etc/local.d' you should put the configuration files you wish to use for the CouchDB.
 
 If you want to build the ArcticWeb container yourself - you only need to do this if you have a specific reason to do so
 
@@ -39,7 +39,7 @@ Or
 
   	$ docker-compose down
 
-The second way of starting is using the script deploy.sh which also makes a [WatchTower](https://github.com/CenturyLinkLabs/watchtower#watchtower) container which makes sure that you are always running the latest version of BalticWeb.
+The second way of starting is using the script deploy.sh which also makes a [WatchTower](https://github.com/CenturyLinkLabs/watchtower#watchtower) container which makes sure that you are always running the latest version of ArcticWeb.
 On the first startup using this method do
 
   	$ chmod +x deploy.sh
@@ -58,4 +58,7 @@ If you want to stop the containers and then remove them do
 
   	$ ./undeploy.sh full
 
-There is also the possibility of a doing a local deployment which doesn't create a WatchTower container and opens ports for databases and admin interface. 
+There is also the possibility of doing a local deployment which doesn't create a WatchTower container and opens ports for databases and admin interface.
+
+## NGINX configuration
+To configure the NGINX container you need to make a directory called 'nginx/conf.d' in your 'arcticweb' directory. In this directory you can add custom NGINX configuration files.  
