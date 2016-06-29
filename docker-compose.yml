@@ -3,8 +3,8 @@ services:
   arcticweb:
     image: dmadk/arcticweb
     links:
-      - mysqldb:db
-      - couchdb:couch
+      - mysqldb:arctic_db
+      - couchdb:arctic_couch
     ports:
       - "8080:8080"
       - "8443:8443"

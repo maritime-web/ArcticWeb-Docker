@@ -146,7 +146,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/embryoDS" pool-name="java:jboss/datasources/embryoDS" enabled="true">
-                    <connection-url>jdbc:mysql://db:3306/embryo</connection-url>
+                    <connection-url>jdbc:mysql://arctic_db:3306/embryo</connection-url>
                     <driver>mysql-connector-java-5.1.38-bin.jar</driver>
                     <security>
                         <user-name>embryo</user-name>
