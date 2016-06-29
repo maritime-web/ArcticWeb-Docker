@@ -3,16 +3,28 @@ services:
   elasticsearch:
     image: elasticsearch:latest
     volumes:
-      - ~$USER/elasticsearch:/usr/share/elasticsearch/data
+      - ~$USER/arcticweb/elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - arctic_logger
   fluentd:
     build: fluentd/
     links:
       - elasticsearch
     ports:
       - '24224:24224'
+    networks:
+      - arctic_logger
   kibana:
     image: kibana:latest
     links:
       - elasticsearch
-    ports:
-      - '5601:5601'
+    #ports:
+    #  - '5601:5601'
+    networks:
+      - arcticnet
+      - arctic_logger
+networks:
+  arcticnet:
+    external: true
+  arctic_logger:
+    driver: bridge

@@ -7,8 +7,8 @@ full ()
 {
     echo "Removing containers"
     docker rm arcticweb arctic_db arctic_couch
-    docker network rm arcticnet
     docker-compose -f logging/docker-compose.yml down
+    docker network rm arcticnet
 }
 
 $1

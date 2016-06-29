@@ -10,6 +10,7 @@ full () {
     docker pull dmadk/embryo-couchdb
     docker pull mysql
     docker pull centurylink/watchtower
+    docker pull nginx:stable
 
     #create a network called arcticnet
     echo "Creating network"
@@ -24,6 +25,8 @@ full () {
     docker create --name arcticweb --net=arcticnet --log-driver=fluentd --link arctic_db:db --link arctic_couch:couch --log-opt fluentd-async-connect=true --restart=unless-stopped -p 8080:8080 -v $HOME/arcticweb/properties:/opt/jboss/wildfly/arcticweb_properties -v $HOME/arcticweb:/opt/jboss/arcticweb dmadk/arcticweb
 
     docker create --name arctic_watchtower --log-driver=fluentd --log-opt fluentd-async-connect=true --restart=unless-stopped -v /var/run/docker.sock:/var/run/docker.sock centurylink/watchtower arcticweb --cleanup
+
+    docker create --name arctic_nginx --net=arcticnet --log-driver=fluentd --log-opt fluentd-async-connect=true --restart=unless-stopped -v $HOME/arcticweb/nginx/conf.d:/etc/nginx/conf.d -p 443:443 -p 80:80 nginx:stable
 }
 
 $1
@@ -34,6 +37,6 @@ docker-compose -f logging/docker-compose.yml up -d
 
 # start all containers
 echo "Starting containers"
-docker start arctic_db arctic_couch arcticweb arctic_watchtower
+docker start arctic_db arctic_couch arcticweb arctic_watchtower arctic_nginx
 
 exit 0
