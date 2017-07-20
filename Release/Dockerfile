@@ -1,5 +1,7 @@
 FROM jboss/wildfly:8.2.0.Final
 
+ARG release_version
+
 # need root to install dependencies
 USER root
 
@@ -26,7 +28,7 @@ COPY mysql-connector-java-5.1.38-bin.jar /opt/jboss/wildfly/modules/com/mysql/ma
 
 COPY module.xml /opt/jboss/wildfly/modules/com/mysql/main/module.xml
 
-RUN curl -o /opt/jboss/wildfly/standalone/deployments/arctic-web.zip https://dma.ci.cloudbees.com/job/ArcticWeb-Release/dk.dma.enav.arcticweb\$arcticweb/lastSuccessfulBuild/artifact/dk.dma.enav.arcticweb/arcticweb/**/*.war/*zip*/arctic-web.zip
+RUN curl -o /opt/jboss/wildfly/standalone/deployments/arctic-web.zip https://dma.ci.cloudbees.com/job/ArcticWeb-Release/dk.dma.enav.arcticweb\$arcticweb/lastSuccessfulBuild/artifact/dk.dma.enav.arcticweb/arcticweb/$release_version/*.war/*zip*/arctic-web.zip
 
 RUN unzip -j -C /opt/jboss/wildfly/standalone/deployments/arctic-web.zip *.war -d /opt/jboss/wildfly/standalone/deployments/
 
@@ -43,7 +45,7 @@ RUN chmod +x /opt/jboss/wildfly/bin/wait_for_it.sh
 
 USER jboss
 
-VOLUME /opt/jboss/arcticweb
+VOLUME /opt/jboss/arcticweb /opt/jboss/wildfly/arcticweb-properties
 
 # wait for the mysql server to be ready and then start the wildfly server
 CMD ["/opt/jboss/wildfly/bin/wait_for_it.sh", "arctic_db:3306", "--timeout=40", "--strict", "--", "/opt/jboss/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0"]
