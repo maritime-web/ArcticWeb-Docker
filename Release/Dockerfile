@@ -1,6 +1,6 @@
 FROM jboss/wildfly:8.2.0.Final
 
-ARG release_version
+ARG RELEASE
 
 # need root to install dependencies
 USER root
@@ -28,7 +28,7 @@ COPY mysql-connector-java-5.1.38-bin.jar /opt/jboss/wildfly/modules/com/mysql/ma
 
 COPY module.xml /opt/jboss/wildfly/modules/com/mysql/main/module.xml
 
-RUN curl -o /opt/jboss/wildfly/standalone/deployments/arctic-web.zip https://dma.ci.cloudbees.com/job/ArcticWeb-Release/dk.dma.enav.arcticweb\$arcticweb/lastSuccessfulBuild/artifact/dk.dma.enav.arcticweb/arcticweb/$release_version/*.war/*zip*/arctic-web.zip
+RUN curl -o /opt/jboss/wildfly/standalone/deployments/arctic-web.zip "https://dma.ci.cloudbees.com/job/ArcticWeb-Release/dk.dma.enav.arcticweb\$arcticweb/lastSuccessfulBuild/artifact/dk.dma.enav.arcticweb/arcticweb/${RELEASE//v}/*.war/*zip*/arctic-web.zip"
 
 RUN unzip -j -C /opt/jboss/wildfly/standalone/deployments/arctic-web.zip *.war -d /opt/jboss/wildfly/standalone/deployments/
 

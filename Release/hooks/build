@@ -2,4 +2,4 @@
 
 printenv
 
-docker build --build-arg release_version=$SOURCE_BRANCH -t $IMAGE_NAME .
+docker build --build-arg RELEASE=$SOURCE_BRANCH -t $IMAGE_NAME .
