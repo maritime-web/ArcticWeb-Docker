@@ -2,6 +2,10 @@ FROM jboss/wildfly:8.2.0.Final
 
 ARG RELEASE
 
+# set locales for image to support UTF-8
+
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+
 # need root to install dependencies
 USER root
 
