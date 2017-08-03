@@ -40,7 +40,7 @@ Or
 
   	$ docker-compose down
 
-The second way of starting is using the script deploy.sh which also makes a [WatchTower](https://github.com/CenturyLinkLabs/watchtower#watchtower) container which makes sure that you are always running the latest version of BalticWeb.
+The second way of starting is using the script deploy.sh which also makes a [WatchTower](https://github.com/CenturyLinkLabs/watchtower#watchtower) container which makes sure that you are always running the latest version of ArcticWeb.
 On the first startup using this method do
 
   	$ chmod +x deploy.sh
