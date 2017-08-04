@@ -27,4 +27,4 @@ services:
   couchdb:
     image: dmadk/embryo-couchdb
     volumes:
-      - ~$USER/arcticCouch/couchdb:/data
+      - ~$USER/arcticweb/couchdb:/data
